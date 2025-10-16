@@ -37,6 +37,8 @@ export default {
     'editor.animationSettings': '动画设置',
     'editor.springSizeFactor': '动画形变',
     'editor.debugSettings': '调试',
+    'editor.export': '导出预设',
+    'editor.import': '导入预设',
   },
   ['en-US']: {
     '_settings': {
@@ -76,5 +78,7 @@ export default {
     'editor.animationSettings': 'Animation Settings',
     'editor.springSizeFactor': 'Animation Morph',
     'editor.debugSettings': 'Debug',
+    'editor.export': 'Export Preset',
+    'editor.import': 'Import Preset',
   },
 }
