@@ -564,6 +564,7 @@ function App() {
           u_glareConvergence: controls.glareConvergence / 100,
           u_glareOppositeFactor: controls.glareOppositeFactor / 100,
           u_glareFactor: controls.glareFactor / 100,
+          u_blurEdge: controls.blurEdge ? 1 : 0,
           STEP: controls.step,
         },
       });

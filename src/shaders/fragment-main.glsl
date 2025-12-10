@@ -33,6 +33,7 @@ uniform float u_glareOppositeFactor;
 uniform float u_glareFactor;
 uniform float u_glareHardness;
 uniform float u_glareAngle;
+uniform int u_blurEdge;
 uniform int u_showShape1;
 
 uniform int STEP;
@@ -294,11 +295,26 @@ vec3 vec2ToRgb(vec2 v) {
   return hsv2rgb(hsv);
 }
 
-vec4 getTextureDispersion(sampler2D tex, vec2 offset, float factor) {
+vec4 getTextureDispersion(
+  sampler2D tex1,
+  sampler2D tex2,
+  float mixRate,
+  vec2 offset,
+  float factor
+) {
   vec4 pixel = vec4(1.0);
-  pixel.r = texture(tex, v_uv + offset * (1.0 - (N_R - 1.0) * factor)).r;
-  pixel.g = texture(tex, v_uv + offset * (1.0 - (N_G - 1.0) * factor)).g;
-  pixel.b = texture(tex, v_uv + offset * (1.0 - (N_B - 1.0) * factor)).b;
+
+  float bgR = texture(tex1, v_uv + offset * (1.0 - (N_R - 1.0) * factor)).r;
+  float bgG = texture(tex1, v_uv + offset * (1.0 - (N_G - 1.0) * factor)).g;
+  float bgB = texture(tex1, v_uv + offset * (1.0 - (N_B - 1.0) * factor)).b;
+
+  float blurR = texture(tex2, v_uv + offset * (1.0 - (N_R - 1.0) * factor)).r;
+  float blurG = texture(tex2, v_uv + offset * (1.0 - (N_G - 1.0) * factor)).g;
+  float blurB = texture(tex2, v_uv + offset * (1.0 - (N_B - 1.0) * factor)).b;
+
+  pixel.r = mix(bgR, blurR, mixRate);
+  pixel.g = mix(bgG, blurG, mixRate);
+  pixel.b = mix(bgB, blurB, mixRate);
 
   return pixel;
 }
@@ -625,10 +641,21 @@ void main() {
         outColor = texture(u_blurredBg, v_uv);
         outColor = mix(outColor, vec4(u_tint.r, u_tint.g, u_tint.b, 1.0), u_tint.a * 0.8);
       } else {
+        // height of glass edge:
+        // h = r - sqrt(r*r - x*x) // (0<=x<=r)
+        float edgeH = nmerged / u_refThickness;
+        // (u_refThickness - sqrt(u_refThickness * u_refThickness - nmerged * nmerged)) /
+        // u_refThickness;
+        // u_refThickness - pow(u_refThickness * u_refThickness - nmerged * nmerged, 0.5);
+        // u_refThickness - pow(u_refThickness * u_refThickness - nmerged * nmerged, 0.5);
         // calculate parameters
         vec2 normal = getNormal(p1, p2, gl_FragCoord.xy);
         vec4 blurredPixel = getTextureDispersion(
+          u_bg,
           u_blurredBg,
+          u_blurEdge > 0
+            ? 1.0
+            : edgeH,
           -normal *
             edgeFactor *
             0.05 *

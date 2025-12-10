@@ -135,6 +135,10 @@ export const useLevaControls = ({
         step: 1,
         value: 1,
       },
+      blurEdge: {
+        label: lang['editor.blurEdge'],
+        value: true,
+      },
       tint: {
         label: lang['editor.tint'],
         value: { r: 255, b: 255, g: 255, a: 0 },
