@@ -80,7 +80,31 @@ function App() {
   return (
     <>
       {levaGlobal}
-
+      <header className={styles.header}>
+        <div className={styles.logoWrapper}>
+          <div className={styles.title}>Liquid Glass Studio</div>
+          <div className={styles.subtitle}>{lang['ui.subtitle']}</div>
+        </div>
+        <div className={styles.content}>
+          <span>
+            by <a>iyinchao</a>
+          </span>
+          <a
+            href="https://github.com/iyinchao/liquid-glass-studio"
+            target="_blank"
+            className={styles.button}
+          >
+            <GitHubIcon />
+          </a>
+          <a
+            href="https://x.com/charles_yin/status/1936338569267986605"
+            target="_blank"
+            className={styles.button}
+          >
+            <XIcon></XIcon>
+          </a>
+        </div>
+      </header>
       <PresetControls controls={controls} controlsAPI={controlsAPI} lang={lang} />
 
       <ResizableWindow
