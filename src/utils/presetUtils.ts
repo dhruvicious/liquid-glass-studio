@@ -1,4 +1,4 @@
-import { type useLevaControls } from '../Controls';
+import { type useLevaControls } from '../components/Controls/Controls';
 export interface PresetData {
   version: string;
   timestamp: string;

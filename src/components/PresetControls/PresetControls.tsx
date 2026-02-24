@@ -4,7 +4,7 @@ import { exportPreset, importPreset } from '../../utils/presetUtils';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import styles from './PresetControls.module.scss';
-import { type useLevaControls } from '../../Controls';
+import { type useLevaControls } from '../Controls/Controls';
 
 export interface PresetControlsProps {
   controls: ReturnType<typeof useLevaControls>['controls'];

@@ -1,11 +1,11 @@
 import { useControls, folder, Leva } from 'leva';
-import { isChineseLanguage, isUzbekLanguage } from './utils';
-import { LevaVectorNew } from './components/LevaVectorNew/LevaVectorNew';
+import { isChineseLanguage, isUzbekLanguage } from '../../utils';
+import { LevaVectorNew } from '../LevaVectorNew/LevaVectorNew';
 // import { LevaImageUpload } from './components/LevaImageUpload/LevaImageUpload';
-import { LevaContainer } from './components/LevaContainer/LevaContainer';
-import { LevaCheckButtons } from './components/LevaCheckButtons';
+import { LevaContainer } from '../LevaContainer/LevaContainer';
+import { LevaCheckButtons } from '../LevaCheckButtons';
 import { useLayoutEffect, useMemo, useState } from 'react';
-import languages from './utils/languages';
+import languages from '../../utils/languages';
 
 export const useLevaControls = ({
   containerRender,
