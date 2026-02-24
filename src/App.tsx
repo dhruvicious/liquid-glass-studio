@@ -10,10 +10,10 @@ import { PresetControls } from './components/PresetControls/PresetControls';
 import { BgSelect } from './components/BgSelect/BgSelect';
 import type { BgTextureType } from './components/BgSelect/BgSelect';
 
-import { useCanvasInfo } from './hooks/useCanvasInfo';
-import { useMouseSpring } from './hooks/useMouseSpring';
-import { useBgTextureState } from './hooks/useBgTextureState';
-import { useWebGLRenderer } from './hooks/useWebGLRenderer';
+import { useCanvasInfo } from './hooks';
+import { useMouseSpring } from './hooks';
+import { useBgTextureState } from './hooks';
+import { useWebGLRenderer } from './hooks';
 import { useLevaControls } from './components/Controls/Controls';
 import { computeGaussianKernelByRadius } from './utils';
 
